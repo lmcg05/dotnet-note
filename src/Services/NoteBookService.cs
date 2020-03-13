@@ -23,7 +23,7 @@ namespace src.Services
 
         public async Task<NoteBook> GetNoteBook(int id)
         {
-            return await _repository.GetSingleAsync(id);
+            return await _repository.GetSingleAsync(notebook => notebook.Id == id, notebook => notebook.Notes);
         }
 
         public async Task<NoteBook> CreateNoteBook(NoteBook noteBook)

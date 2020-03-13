@@ -19,9 +19,10 @@ namespace src.Services
 
         public async Task<List<Note>> GetAllNotesInNoteBookAsync(int notebookId)
         {
+            Console.WriteLine(notebookId);
             // TODO Need to do Eager loading because with lazy loading the notebook.Notes is going to return null
-            NoteBook notebook = await _noteBookRepository.GetSingleAsync(notebookId);
-            return notebook.Notes;
+            NoteBook notebook = await _noteBookRepository.GetSingleAsync(notebook => notebook.Id == notebookId, notebook => notebook.Notes);
+             return notebook.Notes;
         }
 
         public async Task<Note> AddNoteToNoteBookAsync(int notebookId, Note note)
